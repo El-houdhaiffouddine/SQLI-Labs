@@ -1,1 +1,1 @@
-# flask-injection-parameterize-all-the-things
+# SQL Injection Lab
