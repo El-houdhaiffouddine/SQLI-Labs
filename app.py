@@ -12,14 +12,14 @@ class Employee(db.Model):
   name = db.Column(db.String(80), unique=True)
   email = db.Column(db.String(120), unique=True)
   phone = db.Column(db.String(12))
-  dob = db.Column(db.String(10))
+  birth = db.Column(db.String(10))
   salary = db.Column(db.Numeric(10,2))
 
-  def __init__(self, name, email, phone, dob, salary):
+  def __init__(self, name, email, phone, birth, salary):
     self.name = name
     self.email = email
     self.phone = phone
-    self.dob = dob
+    self.birth = birth
     self.salary = salary
 
   def __repr__(self):
@@ -42,6 +42,7 @@ def home():
 def employees():
 
   name = request.args.get('search', [])
+
   if name:
   
      with db.engine.connect() as conn:
