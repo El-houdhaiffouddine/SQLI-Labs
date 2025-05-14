@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
@@ -25,15 +25,33 @@ class Employee(db.Model):
   def __repr__(self):
     return '<Employee %r>' % self.name
 
+@app.route('/',methods=['GET'])
+def home():
+    
+    query = request.args.get('search',[])
+    
+    if query:
 
-@app.route('/', methods=['GET', 'POST'])
+      return redirect( url_for('employees', search=query))
+    
+    else:
+
+      return render_template('employees.html')
+
+@app.route('/employee', methods=['GET'])
 def employees():
-  name = request.form.get('search', '')
 
-  with db.engine.connect() as conn:
-    query = text("SELECT * FROM Employee WHERE name LIKE '%"+ name +"%'")
-    results = conn.execute(query).fetchall()
-  return render_template('employees.html', employees=results)
+  name = request.args.get('search', [])
+  if name:
+  
+     with db.engine.connect() as conn:
+       
+        query = text("SELECT * FROM Employee WHERE name LIKE '%"+ name +"%'")
+        results = conn.execute(query).fetchall()
+        return render_template('employees.html', employees=results)
+  else:
+
+    return redirect( url_for('home'))
 
 
 if __name__ == '__main__':
