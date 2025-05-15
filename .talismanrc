@@ -1,0 +1,6 @@
+fileignoreconfig:
+- filename: templates/employees.html
+  checksum: 38c9f7a40b43f7a3eeace12f41ac5b4645db9d996e9fbd398c803abe429b463c
+- filename: templates/redirect.html
+  checksum: e293a846764ca338d32283617dbe41cbe41a69b91592e135eec5084c504084cc
+version: "1.0"
