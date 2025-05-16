@@ -45,7 +45,7 @@ def employees():
   name = request.args.get('search', [])
   #Imput validation with allowed list of characters
   allowed_list = r"^[a-zA-Z0-9\s]{1,10}$"
-  #Escaping malicous characters
+  #Escaping malicious characters
   escaped_characters = r"['\"-;()%=`#,]"
 
   if name:
@@ -54,13 +54,16 @@ def employees():
        
        with db.engine.connect() as conn:
         
-          #Removing malicous characters
+          #Removing malicious characters
           name = re.sub(escaped_characters,"",name)
+
           f_name = f"%{name}%"
           param = [{"f_name":f_name}]
                
           query = text("SELECT * FROM Employee WHERE name LIKE :f_name")
+          #parameterized query
           results = conn.execute(query, param).fetchall()
+
           return render_template('employees.html', employees=results)
      else:
 
