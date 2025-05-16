@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
+import re
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/user1/employees.db'
@@ -42,14 +43,29 @@ def home():
 def employees():
 
   name = request.args.get('search', [])
+  #Imput validation with allowed list of characters
+  allowed_list = r"^[a-zA-Z0-9\s]{1,10}$"
+  #Escaping malicous characters
+  escaped_characters = r"['\"-;()%=`#,]"
 
   if name:
   
-     with db.engine.connect() as conn:
+     if bool(re.match(allowed_list,name)) and len(name) in range(1,10):
+       
+       with db.engine.connect() as conn:
+        
+          #Removing malicous characters
+          name = re.sub(escaped_characters,"",name)
+          f_name = f"%{name}%"
+          param = [{"f_name":f_name}]
                
-        query = text("SELECT * FROM Employee WHERE name LIKE '%"+name+"%'")
-        results = conn.execute(query).fetchall()
-        return render_template('employees.html', employees=results)
+          query = text("SELECT * FROM Employee WHERE name LIKE :f_name")
+          results = conn.execute(query, param).fetchall()
+          return render_template('employees.html', employees=results)
+     else:
+
+       return render_template("redirect.html")
+       
   else:
 
     return redirect( url_for('home'))
