@@ -7,14 +7,14 @@ with app.app_context():
 
      employees = [Employee(
        'Alice',
-       'alice@example.fr',
+       'alice@cybersecurity.fr',
        '202-555-5555',
        '04-01-1956',
        '75000.00'
       ),
      Employee(
        'Bob',
-       'bob@example.fr',
+       'bob@cybersecurity.fr',
        '323-867-5309',
        '12-31-1984',
        '40000.00'
