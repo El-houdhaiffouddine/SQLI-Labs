@@ -44,7 +44,7 @@ def employees():
 
   name = request.args.get('search', [])
   #Imput validation with allowed list of characters
-  allowed_list = r"^[a-zA-Z0-9\s]{1,10}$"
+  allowed_list = r"^[a-zA-Z0-9\s?]{1,10}$"
   #Escaping malicious characters
   escaped_characters = r"['\"-;()%=`#,]"
 
