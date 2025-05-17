@@ -46,7 +46,7 @@ def employees():
   #Imput validation with allowed list of characters
   allowed_list = r"^[a-zA-Z0-9\s?]{1,10}$"
   #Escaping malicious characters
-  escaped_characters = r"['\"-;()%=`#,]"
+  escaped_characters = r"['\"\-;()%=`#,]"
 
   if name:
   
