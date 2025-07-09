@@ -1,5 +1,5 @@
 # SQLI Labs: How to identify, fix and prevent SQL injection vulnerabilities in the software
-
+<img src="/assets/sast.png" alt="sast" width="100%"><br/>
 <h1>1. Introduction</h1><br/>
 <p>When SQL queries are not implemented correctly in the code, malicious users can break this weaknesses and compromise the security of the database. In this project, we're going to show how to <b>identify</b>,<b>fix</b> and <b>prevent</b> SQL injection vulnerabilities in the software.</p><br/>
 <h1>2. The 6 golden rules to prevent your software against SQL injection attacks.</h1><br/>
